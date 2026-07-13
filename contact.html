@@ -11,7 +11,9 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Noto Sans KR', 'sans-serif'], }
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    }
                 }
             }
         }
@@ -24,6 +26,18 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .dark ::-webkit-scrollbar-thumb { background: #475569; }
+
+        .page-enter { animation: pageEnter 0.8s ease-out forwards; }
+        @keyframes pageEnter { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        
+        /* 토스트 알림 팝업 애니메이션 */
+        #toast { transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        #toast.show { opacity: 1; transform: translate(-50%, 0); }
     </style>
 
     <script>
@@ -38,6 +52,12 @@
 
     <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-blue-600 z-[60] transition-all duration-150 ease-out" style="width: 0%;"></div>
 
+    <!-- 복사 성공 토스트 알림창 -->
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 translate-y-10 opacity-0 bg-slate-800 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-full shadow-2xl z-[70] flex items-center gap-3 pointer-events-none">
+        <svg class="w-5 h-5 text-green-400 dark:text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-msg" class="font-bold text-sm">복사되었습니다!</span>
+    </div>
+
     <nav class="fixed top-0 left-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 border-b border-slate-100 dark:border-slate-800 shadow-sm transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -49,8 +69,7 @@
                     <a href="index.html" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 border-b-2 border-transparent h-full flex items-center px-1 transition-all">홈</a>
                     <a href="about.html" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 border-b-2 border-transparent h-full flex items-center px-1 transition-all">소개</a>
                     <a href="strengths.html" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 border-b-2 border-transparent h-full flex items-center px-1 transition-all">강점</a>
-                    <!-- 연락처 페이지 강조 -->
-                    <a href="contact.html" class="text-blue-600 dark:text-blue-400 font-semibold border-b-2 border-blue-600 h-full flex items-center px-1 transition-all">연락처</a>
+                    <a href="contact.html" class="text-blue-600 dark:text-blue-400 font-semibold border-b-2 border-blue-600 h-full flex items-center px-1 transition-all active">연락처</a>
                     
                     <button id="theme-toggle-desktop" class="ml-4 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none" aria-label="다크모드 토글">
                         <svg id="theme-toggle-light-icon-desktop" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 4.22a1 1 0 011.415 0l.884.884a1 1 0 01-1.414 1.415l-.884-.884a1 1 0 010-1.415zM1 10a1 1 0 011-1h1a1 1 0 110 2H2a1 1 0 01-1-1zm15 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM4.22 15.78a1 1 0 011.415 0l.884.884a1 1 0 01-1.414 1.415l-.884-.884a1 1 0 010-1.415zm10.276 0a1 1 0 010 1.415l-.884.884a1 1 0 01-1.414-1.415l.884-.884a1 1 0 011.415 0zM10 5a5 5 0 100 10 5 5 0 000-10z" clip-rule="evenodd"></path></svg>
@@ -79,16 +98,15 @@
                 <a href="index.html" class="block px-4 py-3 rounded-lg text-base text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800">홈</a>
                 <a href="about.html" class="block px-4 py-3 rounded-lg text-base text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800">소개</a>
                 <a href="strengths.html" class="block px-4 py-3 rounded-lg text-base text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800">강점</a>
-                <!-- 연락처 페이지 강조 -->
-                <a href="contact.html" class="block px-4 py-3 rounded-lg text-base text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-slate-800 font-semibold">연락처</a>
+                <a href="contact.html" class="block px-4 py-3 rounded-lg text-base text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-slate-800 font-semibold active">연락처</a>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow pt-24 pb-20 px-4 sm:px-6 lg:px-8 flex items-center bg-slate-50 dark:bg-slate-900 transition-colors duration-500">
+    <main class="flex-grow pt-24 pb-20 px-4 sm:px-6 lg:px-8 flex items-center bg-slate-50 dark:bg-slate-900 transition-colors duration-500 page-enter">
         <div class="max-w-4xl mx-auto w-full">
             
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 reveal">
                 <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight transition-colors">Contact Me</h1>
                 <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                 <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium max-w-2xl mx-auto transition-colors">
@@ -99,7 +117,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                 
-                <a href="tel:010-0000-0000" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl hover:border-blue-100 dark:hover:border-slate-600 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center text-decoration-none">
+                <!-- 전화번호 카드 -->
+                <a href="javascript:void(0);" onclick="copyToClipboard('010-0000-0000', '전화번호가')" class="reveal delay-100 group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl hover:border-blue-100 dark:hover:border-slate-600 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center text-decoration-none cursor-pointer">
                     <div class="w-20 h-20 bg-blue-50 dark:bg-slate-900 flex items-center justify-center text-blue-600 dark:text-blue-400 rounded-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 shadow-sm">
                         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
@@ -108,12 +127,13 @@
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 transition-colors">Phone</h3>
                     <p class="text-2xl font-medium text-blue-600 dark:text-blue-400 tracking-wide transition-colors">010-0000-0000</p>
                     <div class="mt-6 flex items-center text-sm font-semibold text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        <span>전화 걸기</span>
-                        <svg class="w-4 h-4 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <span>클릭하여 복사하기</span>
+                        <svg class="w-4 h-4 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     </div>
                 </a>
 
-                <a href="mailto:iopled@naver.com" class="group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl hover:border-blue-100 dark:hover:border-slate-600 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center text-decoration-none">
+                <!-- 이메일 카드 -->
+                <a href="javascript:void(0);" onclick="copyToClipboard('iopled@naver.com', '이메일이')" class="reveal delay-200 group bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl hover:border-blue-100 dark:hover:border-slate-600 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center text-decoration-none cursor-pointer">
                     <div class="w-20 h-20 bg-blue-50 dark:bg-slate-900 flex items-center justify-center text-blue-600 dark:text-blue-400 rounded-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 shadow-sm">
                         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -122,8 +142,8 @@
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 transition-colors">Email</h3>
                     <p class="text-xl font-medium text-blue-600 dark:text-blue-400 transition-colors">iopled@naver.com</p>
                     <div class="mt-6 flex items-center text-sm font-semibold text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        <span>메일 보내기</span>
-                        <svg class="w-4 h-4 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <span>클릭하여 복사하기</span>
+                        <svg class="w-4 h-4 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     </div>
                 </a>
 
@@ -190,6 +210,7 @@
             if(themeToggleDesktop) themeToggleDesktop.addEventListener('click', toggleTheme);
             if(themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
 
+            /* 3. 스크롤 진행률 바 업데이트 */
             const scrollProgress = document.getElementById('scroll-progress');
             window.addEventListener('scroll', () => {
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -199,7 +220,46 @@
                     scrollProgress.style.width = scrolled + '%';
                 }
             });
+
+            /* 4. 스크롤 등장 애니메이션 (Scroll Reveal) */
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
+
+        /* 5. 클립보드 복사 & 토스트 알림 기능 */
+        let toastTimeout;
+        function copyToClipboard(text, typeName) {
+            // execCommand 방식을 사용하여 iFrame 등 환경에서도 호환성을 높임
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+            showToast(`${typeName} 복사되었습니다!`);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-msg');
+            msgEl.textContent = message;
+            
+            toast.classList.add('show');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500); // 2.5초 후 토스트 숨김
+        }
     </script>
 </body>
 </html>

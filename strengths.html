@@ -11,7 +11,9 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Noto Sans KR', 'sans-serif'], }
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    }
                 }
             }
         }
@@ -24,6 +26,18 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .dark ::-webkit-scrollbar-thumb { background: #475569; }
+
+        .page-enter { animation: pageEnter 0.8s ease-out forwards; }
+        @keyframes pageEnter { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        
+        /* 틸트(Tilt) 카드 보조 설정 */
+        .tilt-card { transform-style: preserve-3d; }
     </style>
 
     <script>
@@ -48,8 +62,7 @@
                 <div class="hidden md:flex space-x-6 h-full items-center">
                     <a href="index.html" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 border-b-2 border-transparent h-full flex items-center px-1 transition-all">홈</a>
                     <a href="about.html" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 border-b-2 border-transparent h-full flex items-center px-1 transition-all">소개</a>
-                    <!-- 강점 페이지 강조 -->
-                    <a href="strengths.html" class="text-blue-600 dark:text-blue-400 font-semibold border-b-2 border-blue-600 h-full flex items-center px-1 transition-all">강점</a>
+                    <a href="strengths.html" class="text-blue-600 dark:text-blue-400 font-semibold border-b-2 border-blue-600 h-full flex items-center px-1 transition-all active">강점</a>
                     <a href="contact.html" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 border-b-2 border-transparent h-full flex items-center px-1 transition-all">연락처</a>
                     
                     <button id="theme-toggle-desktop" class="ml-4 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none" aria-label="다크모드 토글">
@@ -78,17 +91,16 @@
             <div class="px-4 pt-2 pb-4 space-y-1">
                 <a href="index.html" class="block px-4 py-3 rounded-lg text-base text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800">홈</a>
                 <a href="about.html" class="block px-4 py-3 rounded-lg text-base text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800">소개</a>
-                <!-- 강점 페이지 강조 -->
-                <a href="strengths.html" class="block px-4 py-3 rounded-lg text-base text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-slate-800 font-semibold">강점</a>
+                <a href="strengths.html" class="block px-4 py-3 rounded-lg text-base text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-slate-800 font-semibold active">강점</a>
                 <a href="contact.html" class="block px-4 py-3 rounded-lg text-base text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800">연락처</a>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900 transition-colors duration-500">
+    <main class="flex-grow pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900 transition-colors duration-500 page-enter">
         <div class="max-w-6xl mx-auto w-full">
             
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 reveal">
                 <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight transition-colors">My Strengths</h1>
                 <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                 <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium max-w-2xl mx-auto transition-colors">
@@ -98,45 +110,45 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-blue-50 dark:bg-slate-900 flex items-center justify-center text-blue-600 dark:text-blue-400 rounded-xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                <div class="tilt-card reveal delay-100 bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl transition-all duration-300 group cursor-default">
+                    <div class="w-14 h-14 bg-blue-50 dark:bg-slate-900 flex items-center justify-center text-blue-600 dark:text-blue-400 rounded-xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 pointer-events-none">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 transition-colors">꾸준함</h3>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed transition-colors">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 transition-colors pointer-events-none">꾸준함</h3>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed transition-colors pointer-events-none">
                         매일 정해진 목표를 달성하며 흔들림 없이 나아갑니다. 복잡한 금융 데이터 분석에서 가장 중요한 것은 끝까지 파고드는 끈기라고 믿으며, 작은 성취를 모아 큰 결과를 만들어냅니다.
                     </p>
                 </div>
 
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-blue-50 dark:bg-slate-900 flex items-center justify-center text-blue-600 dark:text-blue-400 rounded-xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                <div class="tilt-card reveal delay-200 bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl transition-all duration-300 group cursor-default">
+                    <div class="w-14 h-14 bg-blue-50 dark:bg-slate-900 flex items-center justify-center text-blue-600 dark:text-blue-400 rounded-xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 pointer-events-none">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 transition-colors">노력</h3>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed transition-colors">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 transition-colors pointer-events-none">노력</h3>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed transition-colors pointer-events-none">
                         주어지는 과제에 깊이 몰입하며, 한계에 부딪혀도 결코 포기하지 않습니다. 다양한 알고리즘 문제와 프로젝트 오류를 해결하며 단련된 문제 해결 능력을 바탕으로 끝내 정답을 찾아냅니다.
                     </p>
                 </div>
 
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-blue-50 dark:bg-slate-900 flex items-center justify-center text-blue-600 dark:text-blue-400 rounded-xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                <div class="tilt-card reveal delay-300 bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-xl transition-all duration-300 group cursor-default">
+                    <div class="w-14 h-14 bg-blue-50 dark:bg-slate-900 flex items-center justify-center text-blue-600 dark:text-blue-400 rounded-xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 pointer-events-none">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 transition-colors">배우고자 하는 의지</h3>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed transition-colors">
-                        빠르게 변화하는 IT 기술과 금융 트렌드를 따라가고자 합니다. SSAFY 과정에서, 새로운 기술 스택 앞에서도 두려움 없이 도전하고 학습하여 프로젝트에 적용합니다.
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 transition-colors pointer-events-none">배우고자 하는 의지</h3>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed transition-colors pointer-events-none">
+                        빠르게 변화하는 IT 기술과 금융 트렌드를 따라가고자 합니다. SSAFY 과정에서 증명했듯, 새로운 기술 스택 앞에서도 두려움 없이 도전하고 학습하여 프로젝트에 적용합니다.
                     </p>
                 </div>
 
             </div>
             
-            <div class="mt-16 text-center">
+            <div class="mt-16 text-center reveal delay-300">
                 <a href="contact.html" class="inline-flex items-center justify-center bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 hover:shadow-lg transition-all duration-300">
                     저와 함께 일해보고 싶으신가요?
                     <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -215,6 +227,50 @@
                     scrollProgress.style.width = scrolled + '%';
                 }
             });
+
+            /* 4. 스크롤 등장 애니메이션 */
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            /* 5. 3D 마우스 틸트(Tilt) 애니메이션 (데스크탑 한정) */
+            const tiltCards = document.querySelectorAll('.tilt-card');
+            
+            // 데스크탑 환경(마우스 사용 가능)일 때만 이벤트 리스너 추가
+            if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+                tiltCards.forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        const xPct = (x / rect.width - 0.5) * 2;
+                        const yPct = (y / rect.height - 0.5) * 2;
+                        
+                        // 기울기 강도 설정 (최대 10도)
+                        const rotateX = yPct * -10; 
+                        const rotateY = xPct * 10;
+                        
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                        card.style.transition = 'transform 0.5s ease-out';
+                    });
+                    
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transition = 'none'; // 들어올 때는 즉각 반응
+                    });
+                });
+            }
         });
     </script>
 </body>
