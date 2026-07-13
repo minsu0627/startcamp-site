@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포트폴리오 | 김민수</title>
+    <!-- Tailwind CSS 로드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 한글 폰트(Noto Sans KR) 로드 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased bg-white selection:bg-blue-200 selection:text-blue-900">
+
+    <!-- 히어로 섹션 -->
+    <header id="hero" class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <!-- 배경 장식용 패턴 (선택사항) -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-blue-100 opacity-50 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-blue-200 opacity-30 blur-3xl"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
+                안녕하세요,<br class="md:hidden"> 
+                <span class="text-blue-600">김민수</span>입니다.
+            </h1>
+            <p class="text-lg md:text-2xl text-slate-600 mb-10 font-medium">
+                금융권 데이터/AI 취업을 희망하는 SSAFY 16기 개발자
+            </p>
+            <!-- CTA 버튼 -->
+            <a href="#about" class="smooth-scroll inline-flex items-center justify-center bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                저에 대해 더 알아보기
+                <svg class="w-5 h-5 ml-2 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- 소개(About) 섹션 -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-16">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                <!-- 이미지 자리 (색 박스 placeholder) -->
+                <div class="w-full md:w-5/12 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-slate-200 overflow-hidden shadow-xl ring-4 ring-blue-50">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" onerror="this.src='https://placehold.co/600x600/e2e8f0/475569?text=Finance+Data'" alt="금융 데이터 AI 프로필" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- 소개 텍스트 -->
+                <div class="w-full md:w-7/12">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">신뢰를 데이터로 증명하는 개발자</h3>
+                    <div class="w-12 h-1 bg-blue-600 mb-6"></div>
+                    <p class="text-slate-600 mb-6 leading-relaxed text-lg">
+                        SSAFY 16기 과정을 통해 탄탄한 소프트웨어 개발 역량과 실전 프로젝트 경험을 쌓아가고 있습니다. 
+                        금융 시장의 복잡한 데이터를 분석하고, AI 기술을 접목하여 사용자에게 <strong class="text-blue-600 font-semibold">가장 신뢰감 있는 서비스</strong>를 제공하는 것이 저의 목표입니다.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        숫자 이면에 숨겨진 인사이트를 도출하는 과정을 즐기며, 논리적인 문제 해결 능력을 바탕으로 팀의 비즈니스 목표 달성에 기여하겠습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 강점 카드 3개 섹션 -->
+    <section id="strengths" class="py-24 bg-slate-50 border-y border-slate-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">Key Competencies</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">My Strengths</h2>
+            </div>
+            
+            <!-- 반응형 그리드: 모바일 1열, 태블릿 이상 3열 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 강점 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                        <svg class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">꾸준함</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        목표를 향해 흔들림 없이 나아갑니다. 매일의 작은 코딩과 학습이 모여 압도적인 결과물을 만든다는 믿음으로 루틴을 실천합니다.
+                    </p>
+                </div>
+
+                <!-- 강점 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                        <svg class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">노력</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        주어진 과제에 끝까지 책임을 다합니다. 에러 앞에서도 좌절하지 않고, 원인을 집요하게 파고들어 결국 해결해내는 끈기를 가졌습니다.
+                    </p>
+                </div>
+
+                <!-- 강점 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                        <svg class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">배우고자 하는 의지</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        빠르게 변화하는 IT 트렌드와 금융 도메인 지식을 스펀지처럼 흡수합니다. 항상 겸손한 자세로 피드백을 수용하며 성장합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA 섹션 -->
+    <section id="contact" class="py-24 bg-blue-600 relative overflow-hidden">
+        <!-- 배경 장식 -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M0 40V0H40" fill="none" stroke="white" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid-pattern)"/>
+            </svg>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">금융 혁신을 이끌어갈 준비된 인재입니다.</h2>
+            <p class="text-blue-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                데이터 기반의 의사결정과 AI 기술로 기업에 새로운 가치를 창출하는 개발자가 되겠습니다. 저의 가능성을 확인해보세요.
+            </p>
+            <a href="mailto:minsu.kim@example.com" class="inline-block bg-white text-blue-700 px-10 py-4 rounded-full font-bold text-lg hover:bg-slate-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                이력서 요청 및 연락하기
+            </a>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="py-8 bg-slate-900 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="text-slate-400 text-sm">
+                &copy; 2026 김민수 (Min-su Kim). All rights reserved. <br class="md:hidden">
+                <span class="hidden md:inline">|</span> Designed for Financial Data/AI Developer Role
+            </p>
+        </div>
+    </footer>
+
+    <!-- 스크립트: 스무스 스크롤 상호작용 구현 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 모든 'smooth-scroll' 클래스를 가진 a 태그 선택
+            const scrollLinks = document.querySelectorAll('.smooth-scroll');
+
+            scrollLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        // 부드러운 스크롤 애니메이션
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
