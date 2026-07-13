@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포트폴리오 | 김민수</title>
+    <!-- Tailwind CSS 로드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 한글 폰트(Noto Sans KR) 로드 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased bg-white selection:bg-blue-200 selection:text-blue-900">
+
+    <!-- ========================================================= -->
+    <!-- 상단 네비게이션 바 (공통 컴포넌트 시작) -->
+    <!-- 복사해서 다른 페이지(예: about.html) 최상단에 붙여넣어 사용할 수 있습니다. -->
+    <!-- ========================================================= -->
+    <nav class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-100 shadow-sm transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- 로고 -->
+                <a href="#hero" class="text-2xl font-black text-slate-900 smooth-scroll tracking-tighter">
+                    KIM<span class="text-blue-600">.</span>
+                </a>
+                
+                <!-- 데스크탑 메뉴 -->
+                <div class="hidden md:flex space-x-8 h-full items-center">
+                    <!-- 현재 페이지에 해당하는 태그에 'active' 클래스를 넣어주면 강조됩니다. -->
+                    <a href="#hero" class="desktop-nav-link active text-slate-600 hover:text-blue-600 h-full flex items-center px-1 smooth-scroll">홈</a>
+                    <a href="#about" class="desktop-nav-link text-slate-600 hover:text-blue-600 h-full flex items-center px-1 smooth-scroll">소개</a>
+                    <a href="#strengths" class="desktop-nav-link text-slate-600 hover:text-blue-600 h-full flex items-center px-1 smooth-scroll">강점</a>
+                    <a href="#contact" class="desktop-nav-link text-slate-600 hover:text-blue-600 h-full flex items-center px-1 smooth-scroll">연락처</a>
+                </div>
+
+                <!-- 모바일 햄버거 버튼 -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-blue-600 focus:outline-none p-2 rounded-md" aria-label="메뉴 열기">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <!-- 햄버거 아이콘 -->
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <!-- 닫기(X) 아이콘 (초기엔 숨김) -->
+                            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 모바일 드롭다운 메뉴 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 shadow-lg absolute w-full left-0 origin-top">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <!-- 현재 페이지에 해당하는 태그에 'active' 클래스를 넣어주면 강조됩니다. -->
+                <a href="#hero" class="mobile-nav-link active block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50 smooth-scroll">홈</a>
+                <a href="#about" class="mobile-nav-link block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50 smooth-scroll">소개</a>
+                <a href="#strengths" class="mobile-nav-link block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50 smooth-scroll">강점</a>
+                <a href="#contact" class="mobile-nav-link block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50 smooth-scroll">연락처</a>
+            </div>
+        </div>
+    </nav>
+    <!-- ========================================================= -->
+    <!-- 상단 네비게이션 바 (공통 컴포넌트 끝) -->
+    <!-- ========================================================= -->
+
+    <!-- 소개(About) 섹션 -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-16">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                <!-- 이미지 자리 (색 박스 placeholder) -->
+                <div class="w-full md:w-5/12 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-slate-200 overflow-hidden shadow-xl ring-4 ring-blue-50">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" onerror="this.src='https://placehold.co/600x600/e2e8f0/475569?text=Finance+Data'" alt="금융 데이터 AI 프로필" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- 소개 텍스트 -->
+                <div class="w-full md:w-7/12">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">신뢰를 데이터로 증명하는 개발자</h3>
+                    <div class="w-12 h-1 bg-blue-600 mb-6"></div>
+                    <p class="text-slate-600 mb-6 leading-relaxed text-lg">
+                        SSAFY 16기 과정을 통해 탄탄한 소프트웨어 개발 역량과 실전 프로젝트 경험을 쌓아가고 있습니다. 
+                        금융 시장의 복잡한 데이터를 분석하고, AI 기술을 접목하여 사용자에게 <strong class="text-blue-600 font-semibold">가장 신뢰감 있는 서비스</strong>를 제공하는 것이 저의 목표입니다.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        숫자 이면에 숨겨진 인사이트를 도출하는 과정을 즐기며, 논리적인 문제 해결 능력을 바탕으로 팀의 비즈니스 목표 달성에 기여하겠습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="py-8 bg-slate-900 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="text-slate-400 text-sm">
+                &copy; 2026 김민수 (Min-su Kim). All rights reserved. <br class="md:hidden">
+                <span class="hidden md:inline">|</span> Designed for Financial Data/AI Developer Role
+            </p>
+        </div>
+    </footer>
+
+    <!-- 스크립트: 인터랙션 구현 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 스무스 스크롤 로직 (기존 유지)
+            const scrollLinks = document.querySelectorAll('.smooth-scroll');
+            scrollLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // 2. 모바일 메뉴 토글 로직
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            function toggleMenu() {
+                mobileMenu.classList.toggle('hidden');
+                menuIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMenu);
+
+            // 모바일 메뉴의 링크 클릭 시 메뉴 닫기
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // 3. 스크롤 위치에 따른 현재 페이지 활성화(ScrollSpy) 로직 - active 클래스 활용
+            const sections = document.querySelectorAll('header[id], section[id]');
+            const desktopNavLinks = document.querySelectorAll('.desktop-nav-link');
+            const mNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            function setActiveNav(targetId) {
+                // 데스크탑 메뉴 UI 업데이트
+                desktopNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${targetId}`) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // 모바일 메뉴 UI 업데이트
+                mNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${targetId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const scrollY = window.scrollY;
+                
+                // 현재 보이는 섹션 감지
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    // 네비바 높이와 여백을 감안하여 활성화 타이밍 조정
+                    if (scrollY >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                if (current) {
+                    setActiveNav(current);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
