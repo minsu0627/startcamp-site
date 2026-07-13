@@ -66,67 +66,28 @@
     <!-- 상단 네비게이션 바 (공통 컴포넌트 끝) -->
     <!-- ========================================================= -->
 
-
-    <!-- 소개(About) 섹션 -->
-    <!-- py-32로 상하 여백을 늘려 더 넓은 느낌을 줌 -->
-    <section id="about" class="py-32 bg-white relative overflow-hidden">
+    <!-- CTA 섹션 -->
+    <section id="contact" class="py-24 bg-blue-600 relative overflow-hidden">
+        <!-- 배경 장식 -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M0 40V0H40" fill="none" stroke="white" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid-pattern)"/>
+            </svg>
+        </div>
         
-        <!-- 디자인 포인트: 배경을 심심하지 않게 채워주는 은은한 블러 원형 -->
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-72 h-72 rounded-full bg-blue-50 blur-3xl opacity-50 pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 rounded-full bg-slate-50 blur-3xl pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            
-            <!-- 섹션 타이틀 -->
-            <div class="text-center mb-20">
-                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">About Me</h2>
-                <div class="w-24 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
-            </div>
-            
-            <!-- Grid 레이아웃 적용으로 가로 공간을 최대한 넓게 활용 -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
-                
-                <!-- 왼쪽: 프로필 이미지 영역 (5칸 차지) -->
-                <div class="lg:col-span-5 flex justify-center lg:justify-end">
-                    <div class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px]">
-                        <!-- 뒤에 깔리는 꾸밈용 패턴/색상 박스 -->
-                        <div class="absolute inset-0 bg-blue-600 rounded-[2.5rem] rotate-6 opacity-10 transform scale-105 transition-transform duration-500 hover:rotate-3"></div>
-                        <div class="absolute inset-0 bg-slate-200 rounded-[2.5rem] -rotate-3 transition-transform duration-500 hover:rotate-0"></div>
-                        
-                        <!-- 실제 이미지 -->
-                        <div class="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl ring-1 ring-black/5 bg-white">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                 onerror="this.src='https://placehold.co/800x800/e2e8f0/475569?text=Finance+Data'" 
-                                 alt="금융 데이터 AI 프로필" 
-                                 class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 오른쪽: 소개 텍스트 영역 (7칸 차지) -->
-                <div class="lg:col-span-7 flex flex-col justify-center">
-                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                        신뢰를 <span class="text-blue-600">데이터</span>로<br class="hidden md:block" /> 증명하는 개발자
-                    </h3>
-                    
-                    <p class="text-slate-600 mb-8 leading-loose text-lg md:text-xl font-light">
-                        SSAFY 16기 과정을 통해 탄탄한 소프트웨어 개발 역량과 실전 프로젝트 경험을 쌓아가고 있습니다. 
-                        금융 시장의 복잡한 데이터를 분석하고, AI 기술을 접목하여 사용자에게 <strong class="text-blue-600 font-semibold">가장 신뢰감 있는 서비스</strong>를 제공하는 것이 저의 목표입니다.
-                    </p>
-                    <p class="text-slate-600 leading-loose text-lg md:text-xl font-light">
-                        숫자 이면에 숨겨진 인사이트를 도출하는 과정을 즐기며, 논리적인 문제 해결 능력을 바탕으로 팀의 비즈니스 목표 달성에 기여하겠습니다.
-                    </p>
-
-                    <!-- 부가적인 정보 칩(선택사항) -->
-                    <div class="mt-10 flex flex-wrap gap-3">
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium">#데이터분석</span>
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium">#인공지능</span>
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium">#금융IT</span>
-                        <span class="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-bold">SSAFY 16기</span>
-                    </div>
-                </div>
-                
-            </div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">금융 혁신을 이끌어갈 준비된 인재입니다.</h2>
+            <p class="text-blue-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                데이터 기반의 의사결정과 AI 기술로 기업에 새로운 가치를 창출하는 개발자가 되겠습니다. 저의 가능성을 확인해보세요.
+            </p>
+            <a href="mailto:minsu.kim@example.com" class="inline-block bg-white text-blue-700 px-10 py-4 rounded-full font-bold text-lg hover:bg-slate-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                이력서 요청 및 연락하기
+            </a>
         </div>
     </section>
 
