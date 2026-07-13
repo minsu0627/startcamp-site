@@ -1,35 +1,28 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>홈 | 포트폴리오 | 김민수</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind 다크모드 수동 제어 설정 -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // class 기반 다크모드 활성화
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Noto Sans KR', sans-serif; }
-        
-        /* 네비게이션 데스크탑 활성화 스타일 */
-        .desktop-nav-link {
-            border-bottom-width: 2px;
-            border-color: transparent;
-            transition: all 0.3s ease;
-        }
-        .desktop-nav-link.active {
-            color: #2563eb; /* text-blue-600 */
-            font-weight: 600;
-            border-color: #2563eb; 
-        }
-        
-        /* 네비게이션 모바일 활성화 스타일 */
-        .mobile-nav-link { transition: all 0.3s ease; }
-        .mobile-nav-link.active {
-            color: #2563eb;
-            font-weight: 600;
-            background-color: #eff6ff; /* bg-blue-50 */
-        }
-        
         /* 메인 비주얼 부유 애니메이션 */
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -38,42 +31,65 @@
         }
         .animate-float { animation: float 6s ease-in-out infinite; }
         
-        /* 배경 그라데이션 애니메이션 효과 */
-        .bg-gradient-animate {
-            background: linear-gradient(120deg, #f8fafc 0%, #eff6ff 100%);
-        }
+        /* 스크롤바 숨기기 (선택사항, 깔끔한 UI를 위해) */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
     </style>
+
+    <!-- FOUC(깜빡임) 방지 다크모드 초기화 스크립트 -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
 </head>
-<body class="text-slate-800 antialiased bg-white selection:bg-blue-200 selection:text-blue-900 flex flex-col min-h-screen">
+<body class="text-slate-800 dark:text-slate-200 antialiased bg-white dark:bg-slate-900 selection:bg-blue-200 selection:text-blue-900 dark:selection:bg-blue-900 dark:selection:text-blue-200 flex flex-col min-h-screen transition-colors duration-300">
+
+    <!-- 스크롤 진행률 표시 바 -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-blue-600 z-[60] transition-all duration-150 ease-out" style="width: 0%;"></div>
 
     <!-- ========================================================= -->
     <!-- 상단 네비게이션 바 (공통 컴포넌트 시작) -->
-    <!-- 복사해서 다른 페이지(예: about.html) 최상단에 붙여넣어 사용할 수 있습니다. -->
     <!-- ========================================================= -->
-    <nav class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-100 shadow-sm transition-all duration-300">
+    <nav class="fixed top-0 left-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 border-b border-slate-100 dark:border-slate-800 shadow-sm transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- 로고 -->
-                <a href="index.html" class="text-2xl font-black text-slate-900 smooth-scroll tracking-tighter hover:opacity-80 transition-opacity">
+                <a href="index.html" class="text-2xl font-black text-slate-900 dark:text-white tracking-tighter hover:opacity-80 transition-opacity">
                     KIM<span class="text-blue-600">.</span>
                 </a>
                 
                 <!-- 데스크탑 메뉴 -->
-                <div class="hidden md:flex space-x-8 h-full items-center">
-                    <!-- 현재 페이지(홈)에 해당하는 태그에 'active' 클래스를 넣어주면 강조됩니다. -->
-                    <a href="index.html" class="desktop-nav-link active text-slate-600 hover:text-blue-600 h-full flex items-center px-1 smooth-scroll">홈</a>
-                    <a href="about.html" class="desktop-nav-link text-slate-600 hover:text-blue-600 h-full flex items-center px-1 smooth-scroll">소개</a>
-                    <a href="strengths.html" class="desktop-nav-link text-slate-600 hover:text-blue-600 h-full flex items-center px-1 smooth-scroll">강점</a>
-                    <a href="contact.html" class="desktop-nav-link text-slate-600 hover:text-blue-600 h-full flex items-center px-1 smooth-scroll">연락처</a>
+                <div class="hidden md:flex space-x-6 h-full items-center">
+                    <a href="index.html" class="text-blue-600 dark:text-blue-400 font-semibold border-b-2 border-blue-600 h-full flex items-center px-1 transition-all">홈</a>
+                    <a href="about.html" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 border-b-2 border-transparent h-full flex items-center px-1 transition-all">소개</a>
+                    <a href="strengths.html" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 border-b-2 border-transparent h-full flex items-center px-1 transition-all">강점</a>
+                    <a href="contact.html" class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 border-b-2 border-transparent h-full flex items-center px-1 transition-all">연락처</a>
+                    
+                    <!-- 데스크탑 다크모드 토글 버튼 -->
+                    <button id="theme-toggle-desktop" class="ml-4 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none" aria-label="다크모드 토글">
+                        <!-- 태양 아이콘 (다크모드일 때 표시) -->
+                        <svg id="theme-toggle-light-icon-desktop" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 4.22a1 1 0 011.415 0l.884.884a1 1 0 01-1.414 1.415l-.884-.884a1 1 0 010-1.415zM1 10a1 1 0 011-1h1a1 1 0 110 2H2a1 1 0 01-1-1zm15 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM4.22 15.78a1 1 0 011.415 0l.884.884a1 1 0 01-1.414 1.415l-.884-.884a1 1 0 010-1.415zm10.276 0a1 1 0 010 1.415l-.884.884a1 1 0 01-1.414-1.415l.884-.884a1 1 0 011.415 0zM10 5a5 5 0 100 10 5 5 0 000-10z" clip-rule="evenodd"></path></svg>
+                        <!-- 달 아이콘 (라이트모드일 때 표시) -->
+                        <svg id="theme-toggle-dark-icon-desktop" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    </button>
                 </div>
 
-                <!-- 모바일 햄버거 버튼 -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-blue-600 focus:outline-none p-2 rounded-md" aria-label="메뉴 열기">
+                <!-- 모바일 우측 컨트롤 (다크모드 토글 + 햄버거) -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <!-- 모바일 다크모드 토글 버튼 -->
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none" aria-label="다크모드 토글">
+                        <svg id="theme-toggle-light-icon-mobile" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 4.22a1 1 0 011.415 0l.884.884a1 1 0 01-1.414 1.415l-.884-.884a1 1 0 010-1.415zM1 10a1 1 0 011-1h1a1 1 0 110 2H2a1 1 0 01-1-1zm15 0a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1zM4.22 15.78a1 1 0 011.415 0l.884.884a1 1 0 01-1.414 1.415l-.884-.884a1 1 0 010-1.415zm10.276 0a1 1 0 010 1.415l-.884.884a1 1 0 01-1.414-1.415l.884-.884a1 1 0 011.415 0zM10 5a5 5 0 100 10 5 5 0 000-10z" clip-rule="evenodd"></path></svg>
+                        <svg id="theme-toggle-dark-icon-mobile" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    </button>
+
+                    <button id="mobile-menu-btn" class="text-slate-600 dark:text-slate-400 focus:outline-none p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="메뉴 열기">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <!-- 햄버거 아이콘 -->
                             <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            <!-- 닫기(X) 아이콘 (초기엔 숨김) -->
                             <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
@@ -82,13 +98,12 @@
         </div>
 
         <!-- 모바일 드롭다운 메뉴 -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 shadow-lg absolute w-full left-0 origin-top">
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-lg absolute w-full left-0 origin-top transition-colors">
             <div class="px-4 pt-2 pb-4 space-y-1">
-                <!-- 현재 페이지(홈)에 해당하는 태그에 'active' 클래스를 넣어주면 강조됩니다. -->
-                <a href="index.html" class="mobile-nav-link active block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50 smooth-scroll">홈</a>
-                <a href="about.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50 smooth-scroll">소개</a>
-                <a href="strengths.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50 smooth-scroll">강점</a>
-                <a href="contact.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50 smooth-scroll">연락처</a>
+                <a href="index.html" class="block px-4 py-3 rounded-lg text-base text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-slate-800 font-semibold">홈</a>
+                <a href="about.html" class="block px-4 py-3 rounded-lg text-base text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800">소개</a>
+                <a href="strengths.html" class="block px-4 py-3 rounded-lg text-base text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800">강점</a>
+                <a href="contact.html" class="block px-4 py-3 rounded-lg text-base text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800">연락처</a>
             </div>
         </div>
     </nav>
@@ -98,31 +113,32 @@
 
     <!-- 메인 콘텐츠 (홈) -->
     <main class="flex-grow flex items-center justify-center pt-16">
-        <section class="relative w-full py-20 lg:py-32 bg-gradient-animate overflow-hidden min-h-[calc(100vh-4rem-80px)] flex items-center">
+        <!-- 배경 다크모드 대응을 위해 Tailwind 그라데이션 유틸리티 사용 -->
+        <section class="relative w-full py-20 lg:py-32 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 overflow-hidden min-h-[calc(100vh-4rem)] flex items-center transition-colors duration-500">
             
             <!-- 장식용 배경 요소 -->
             <div class="absolute inset-0 z-0 pointer-events-none">
-                <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[30rem] h-[30rem] rounded-full bg-blue-100 opacity-60 blur-3xl"></div>
-                <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-indigo-100 opacity-50 blur-3xl"></div>
+                <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[30rem] h-[30rem] rounded-full bg-blue-200 dark:bg-blue-900 opacity-40 dark:opacity-20 blur-3xl mix-blend-multiply dark:mix-blend-screen transition-colors"></div>
+                <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-indigo-200 dark:bg-indigo-900 opacity-40 dark:opacity-20 blur-3xl mix-blend-multiply dark:mix-blend-screen transition-colors"></div>
             </div>
             
             <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-20">
                 
                 <!-- 좌측 텍스트 콘텐츠 -->
                 <div class="flex-1 text-center md:text-left order-2 md:order-1 mt-8 md:mt-0">
-                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-white border border-blue-100 text-blue-700 text-sm font-bold tracking-wider mb-6 shadow-sm">
-                        <span class="w-2 h-2 rounded-full bg-blue-600 mr-2 animate-pulse"></span>
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-blue-100 dark:border-slate-700 text-blue-700 dark:text-blue-400 text-sm font-bold tracking-wider mb-6 shadow-sm transition-colors">
+                        <span class="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 mr-2 animate-pulse"></span>
                         Data & AI Developer
                     </div>
                     
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight leading-tight">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight leading-tight transition-colors">
                         미래 금융을 설계하는<br> 
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">김민수</span>입니다.
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">김민수</span>입니다.
                     </h1>
                     
-                    <p class="text-lg md:text-xl text-slate-600 mb-10 font-medium leading-relaxed max-w-lg mx-auto md:mx-0">
+                    <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-10 font-medium leading-relaxed max-w-lg mx-auto md:mx-0 transition-colors">
                         금융권 데이터/AI 직무 취업을 희망하는 <br class="hidden lg:block">
-                        <strong class="text-slate-800 border-b-2 border-blue-200 pb-0.5">SSAFY 16기 개발자</strong>입니다. 데이터 속에서 새로운 인사이트를 발견합니다.
+                        <strong class="text-slate-800 dark:text-white border-b-2 border-blue-200 dark:border-blue-900 pb-0.5 transition-colors">SSAFY 16기 개발자</strong>입니다. 데이터 속에서 새로운 인사이트를 발견합니다.
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
@@ -130,7 +146,7 @@
                             저에 대해 알아보기
                             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </a>
-                        <a href="contact.html" class="w-full sm:w-auto inline-flex items-center justify-center bg-white text-slate-700 border border-slate-200 px-8 py-4 rounded-full font-semibold hover:bg-slate-50 hover:border-blue-200 hover:text-blue-600 transition-all duration-300">
+                        <a href="contact.html" class="w-full sm:w-auto inline-flex items-center justify-center bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 px-8 py-4 rounded-full font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-blue-200 dark:hover:border-slate-600 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300">
                             연락하기
                         </a>
                     </div>
@@ -140,17 +156,17 @@
                 <div class="flex-1 w-full max-w-md mx-auto order-1 md:order-2">
                     <div class="relative animate-float">
                         <!-- 이미지 뒤쪽 데코레이션 박스 -->
-                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-400 rounded-[2rem] transform rotate-3 scale-105 opacity-20 shadow-inner"></div>
-                        <div class="absolute inset-0 bg-white rounded-[2rem] transform -rotate-2 scale-100 opacity-50"></div>
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-400 rounded-[2rem] transform rotate-3 scale-105 opacity-20 dark:opacity-30 shadow-inner transition-opacity"></div>
+                        <div class="absolute inset-0 bg-white dark:bg-slate-800 rounded-[2rem] transform -rotate-2 scale-100 opacity-50 transition-colors"></div>
                         
-                        <!-- 메인 이미지 (금융/데이터 분석 컨셉) -->
+                        <!-- 메인 이미지 -->
                         <img 
                             src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1000&auto=format&fit=crop" 
                             alt="금융 데이터 차트 및 분석 이미지" 
-                            class="relative z-10 w-full h-auto rounded-[2rem] shadow-2xl object-cover border-4 border-white/50 backdrop-blur-sm"
+                            class="relative z-10 w-full h-auto rounded-[2rem] shadow-2xl object-cover border-4 border-white/50 dark:border-slate-700/50 backdrop-blur-sm transition-colors"
                             onerror="this.src='https://placehold.co/800x800/e2e8f0/475569?text=Financial+Data+Analytics'"
                         >
-
+                        
                     </div>
                 </div>
 
@@ -159,7 +175,7 @@
     </main>
 
     <!-- 공통 푸터 -->
-    <footer class="py-8 bg-slate-900 text-center relative z-10 mt-auto">
+    <footer class="py-8 bg-slate-900 dark:bg-black text-center relative z-10 mt-auto transition-colors">
         <div class="max-w-6xl mx-auto px-4">
             <p class="text-slate-400 text-sm">
                 &copy; 2026 김민수. All rights reserved. | Designed for Financial Data/AI Developer Role
@@ -168,8 +184,8 @@
     </footer>
 
     <script>
-        // 모바일 메뉴 토글 스크립트
         document.addEventListener('DOMContentLoaded', () => {
+            /* 1. 모바일 햄버거 메뉴 토글 */
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const menuIcon = document.getElementById('menu-icon');
@@ -182,6 +198,57 @@
                     closeIcon.classList.toggle('hidden');
                 });
             }
+
+            /* 2. 다크모드 토글 로직 */
+            const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+            const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+            
+            // 아이콘 엘리먼트들
+            const darkIconDesktop = document.getElementById('theme-toggle-dark-icon-desktop');
+            const lightIconDesktop = document.getElementById('theme-toggle-light-icon-desktop');
+            const darkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
+            const lightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
+
+            // 초기 로드시 아이콘 상태 설정
+            function updateIcons() {
+                if (document.documentElement.classList.contains('dark')) {
+                    darkIconDesktop.classList.add('hidden');
+                    lightIconDesktop.classList.remove('hidden');
+                    darkIconMobile.classList.add('hidden');
+                    lightIconMobile.classList.remove('hidden');
+                } else {
+                    lightIconDesktop.classList.add('hidden');
+                    darkIconDesktop.classList.remove('hidden');
+                    lightIconMobile.classList.add('hidden');
+                    darkIconMobile.classList.remove('hidden');
+                }
+            }
+            updateIcons();
+
+            // 테마 변경 함수
+            function toggleTheme() {
+                document.documentElement.classList.toggle('dark');
+                if (document.documentElement.classList.contains('dark')) {
+                    localStorage.theme = 'dark';
+                } else {
+                    localStorage.theme = 'light';
+                }
+                updateIcons();
+            }
+
+            if(themeToggleDesktop) themeToggleDesktop.addEventListener('click', toggleTheme);
+            if(themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+            /* 3. 스크롤 진행률 바 업데이트 */
+            const scrollProgress = document.getElementById('scroll-progress');
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if(height > 0) {
+                    const scrolled = (winScroll / height) * 100;
+                    scrollProgress.style.width = scrolled + '%';
+                }
+            });
         });
     </script>
 </body>
