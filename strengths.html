@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강점 | 포트폴리오 | 김민수</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        
+        /* 네비게이션 데스크탑 활성화 스타일 */
+        .desktop-nav-link {
+            border-bottom-width: 2px;
+            border-color: transparent;
+            transition: all 0.3s ease;
+        }
+        .desktop-nav-link.active {
+            color: #2563eb; /* text-blue-600 */
+            font-weight: 600;
+            border-color: #2563eb;
+        }
+        
+        /* 네비게이션 모바일 활성화 스타일 */
+        .mobile-nav-link { transition: all 0.3s ease; }
+        .mobile-nav-link.active {
+            color: #2563eb;
+            font-weight: 600;
+            background-color: #eff6ff; /* bg-blue-50 */
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased bg-slate-50 selection:bg-blue-200 selection:text-blue-900 flex flex-col min-h-screen">
+
+    <!-- ========================================================= -->
+    <!-- 상단 네비게이션 바 (공통 컴포넌트 시작) -->
+    <!-- 복사해서 다른 페이지(예: about.html) 최상단에 붙여넣어 사용할 수 있습니다. -->
+    <!-- ========================================================= -->
+    <nav class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-100 shadow-sm transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- 로고 -->
+                <a href="index.html" class="text-2xl font-black text-slate-900 tracking-tighter hover:opacity-80 transition-opacity">
+                    KIM<span class="text-blue-600">.</span>
+                </a>
+                
+                <!-- 데스크탑 메뉴 -->
+                <div class="hidden md:flex space-x-8 h-full items-center">
+                    <!-- 현재 페이지(강점)에 'active' 클래스 적용 -->
+                    <a href="index.html" class="desktop-nav-link text-slate-600 hover:text-blue-600 h-full flex items-center px-1">홈</a>
+                    <a href="about.html" class="desktop-nav-link text-slate-600 hover:text-blue-600 h-full flex items-center px-1">소개</a>
+                    <a href="strengths.html" class="desktop-nav-link active text-slate-600 hover:text-blue-600 h-full flex items-center px-1">강점</a>
+                    <a href="contact.html" class="desktop-nav-link text-slate-600 hover:text-blue-600 h-full flex items-center px-1">연락처</a>
+                </div>
+
+                <!-- 모바일 햄버거 버튼 -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-blue-600 focus:outline-none p-2 rounded-md" aria-label="메뉴 열기">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <!-- 햄버거 아이콘 -->
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <!-- 닫기(X) 아이콘 (초기엔 숨김) -->
+                            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 모바일 드롭다운 메뉴 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 shadow-lg absolute w-full left-0 origin-top">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <!-- 현재 페이지(강점)에 'active' 클래스 적용 -->
+                <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50">홈</a>
+                <a href="about.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50">소개</a>
+                <a href="strengths.html" class="mobile-nav-link active block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50">강점</a>
+                <a href="contact.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base text-slate-600 hover:text-blue-600 hover:bg-slate-50">연락처</a>
+            </div>
+        </div>
+    </nav>
+    <!-- ========================================================= -->
+    <!-- 상단 네비게이션 바 (공통 컴포넌트 끝) -->
+    <!-- ========================================================= -->
+
+    <main class="flex-grow pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto w-full">
+            
+            <!-- 페이지 헤더 -->
+            <div class="text-center mb-16">
+                <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">My Strengths</h1>
+                <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-lg md:text-xl text-slate-600 font-medium max-w-2xl mx-auto">
+                    데이터/AI 개발자로서 저를 가장 잘 나타내는 세 가지 핵심 역량입니다.
+                </p>
+            </div>
+
+            <!-- 강점 카드 컨테이너 (모바일 세로, 데스크탑 가로 3열) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- 강점 1: 꾸준함 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">꾸준함</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        매일 정해진 목표를 달성하며 흔들림 없이 나아갑니다. 복잡한 금융 데이터 분석에서 가장 중요한 것은 끝까지 파고드는 끈기라고 믿으며, 작은 성취를 모아 큰 결과를 만들어냅니다.
+                    </p>
+                </div>
+
+                <!-- 강점 2: 노력파 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">노력파</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        주어지는 과제에 깊이 몰입하며, 한계에 부딪혀도 결코 포기하지 않습니다. 다양한 알고리즘 문제와 프로젝트 오류를 해결하며 단련된 문제 해결 능력을 바탕으로 끝내 정답을 찾아냅니다.
+                    </p>
+                </div>
+
+                <!-- 강점 3: 배우고자 하는 의지 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">배우고자 하는 의지</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        빠르게 변화하는 IT 기술과 금융 트렌드를 스펀지처럼 흡수합니다. SSAFY 과정에서 증명했듯, 새로운 기술 스택 앞에서도 두려움 없이 도전하고 학습하여 프로젝트에 적용합니다.
+                    </p>
+                </div>
+
+            </div>
+            
+            <!-- CTA 섹션 연결 버튼 -->
+            <div class="mt-16 text-center">
+                <a href="contact.html" class="inline-flex items-center justify-center bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 hover:shadow-lg transition-all duration-300">
+                    저와 함께 일해보고 싶으신가요?
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-8 bg-slate-900 text-center mt-auto">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="text-slate-400 text-sm">
+                &copy; 2026 김민수. All rights reserved. | Designed for Financial Data/AI Developer Role
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 모바일 메뉴 토글 스크립트
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            if(mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    menuIcon.classList.toggle('hidden');
+                    closeIcon.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
